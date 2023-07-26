@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.KattaBozorTest" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">#8BC34A</item>
+    </style>
+
+    <style name="Theme.KattaBozorTest" parent="Base.Theme.KattaBozorTest" />
+</resources>
