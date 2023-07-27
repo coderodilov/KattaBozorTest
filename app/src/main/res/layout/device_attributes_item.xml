@@ -15,18 +15,18 @@
         android:textStyle="bold"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="Rom"
+        android:text="@string/rom"
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/tvBrand"
+        android:id="@+id/tvValue"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="16sp"
         android:layout_marginTop="6dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="168GB"
+        android:text="@string/_168gb"
         android:textSize="12sp" />
 
 </LinearLayout>
