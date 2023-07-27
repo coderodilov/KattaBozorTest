@@ -1,8 +1,10 @@
 package uz.coderodilov.kattabozortest.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.coderodilov.kattabozortest.api.ApiConfig
 import uz.coderodilov.kattabozortest.api.ApiService
+import uz.coderodilov.kattabozortest.utils.NetworkStateListener
 import javax.inject.Singleton
 
 /* 
@@ -35,6 +38,12 @@ class AppModule {
             .client(client)
             .build()
             .create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNetworkStateListener(@ApplicationContext context: Context):NetworkStateListener{
+        return NetworkStateListener(context)
     }
 
 }

@@ -1,6 +1,5 @@
 package uz.coderodilov.kattabozortest.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
@@ -8,27 +7,35 @@ import retrofit2.Response
 import uz.coderodilov.kattabozortest.api.ApiService
 import uz.coderodilov.kattabozortest.models.Offers
 import uz.coderodilov.kattabozortest.models.Device
+import uz.coderodilov.kattabozortest.utils.NetworkResult
+import uz.coderodilov.kattabozortest.utils.NetworkStatus
 import javax.inject.Inject
 
 /* 
 * Created by Coder Odilov on 26/07/2023
 */
 
-class StoreRepository @Inject constructor(private val apiService: ApiService){
-    fun getDevices() : MutableLiveData<ArrayList<Device>>{
-        val listOfDevice = MutableLiveData<ArrayList<Device>>()
+class StoreRepository @Inject constructor(private val apiService: ApiService) {
 
-        apiService.getDevices().enqueue(object : Callback<Offers>{
-           override fun onResponse(call: Call<Offers>, response: Response<Offers>) {
-               listOfDevice.postValue(response.body()?.offers as ArrayList<Device>)
-           }
+    private val listOfDevice = MutableLiveData<NetworkResult<List<Device>>>()
 
-            override fun onFailure(call: Call<Offers>, t: Throwable) {
-                t.printStackTrace()
+    fun getDevices(): MutableLiveData<NetworkResult<List<Device>>> {
+
+        listOfDevice.postValue(NetworkResult.loading())
+
+        apiService.getDevices().enqueue(object : Callback<Offers> {
+            override fun onResponse(call: Call<Offers>, response: Response<Offers>) {
+                listOfDevice.postValue(
+                    NetworkResult.success(response.body()?.offers)
+                )
             }
 
-       })
-        Log.d("TTT", listOfDevice.value.toString())
-       return listOfDevice
+            override fun onFailure(call: Call<Offers>, t: Throwable) {
+                listOfDevice.postValue(NetworkResult.error(t.toString()))
+            }
+
+        })
+
+        return listOfDevice
     }
 }
