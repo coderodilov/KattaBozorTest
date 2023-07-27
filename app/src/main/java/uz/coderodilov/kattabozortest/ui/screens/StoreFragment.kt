@@ -29,7 +29,6 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
     private var selectedDevicePosition = 0
     private val viewModel: StoreViewModel by viewModels()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentStoreBinding.bind(view)
@@ -61,11 +60,12 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
         }
 
         viewModel.networkState.observe(requireActivity()){ isConnected ->
-            if (!isConnected) showNetworkStateDialog()
+            if (!isConnected) {
+                showNetworkStateDialog()
+            }
         }
 
     }
-
 
     private fun showDeviceDetailsDialog() {
         val deviceDetailsDialog = BottomSheetDialog(requireContext())

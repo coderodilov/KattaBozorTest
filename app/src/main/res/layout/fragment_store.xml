@@ -14,6 +14,7 @@
        android:scrollbars="vertical"
        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
        app:spanCount="2"
+       android:splitMotionEvents="false"
        tools:listitem="@layout/device_item" />
 
    <ProgressBar
