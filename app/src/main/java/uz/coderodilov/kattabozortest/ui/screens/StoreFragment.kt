@@ -26,7 +26,6 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
     private lateinit var deviceAdapter: DeviceRvAdapter
     private lateinit var deviceList:List<Device>
 
-    private var selectedDevicePosition = 0
     private val viewModel: StoreViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,8 +46,7 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
                     binding.rvDevices.adapter = deviceAdapter
 
                     deviceAdapter.onItemClickListener{ position ->
-                        selectedDevicePosition = position
-                        showDeviceDetailsDialog()
+                        showDeviceDetailsDialog(position)
                     }
                 }
 
@@ -67,7 +65,7 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
 
     }
 
-    private fun showDeviceDetailsDialog() {
+    private fun showDeviceDetailsDialog(selectedDevicePosition:Int) {
         val deviceDetailsDialog = BottomSheetDialog(requireContext())
         val dialogBinding = DeviceDetailsBotttomSheetBinding
             .inflate(LayoutInflater.from(requireContext()))
